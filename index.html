@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CRACKIT</title>
+  <style>
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background-color: #fff; 
+      color: #000;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    nav {
+      width: 100%;
+      padding: 1.2rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #ddd;
+      background: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #000;
+      letter-spacing: 1px;
+    }
+
+    .nav-links {
+      text-align: center;
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      text-align: center;
+      text-decoration: none;
+      color: #000;
+      font-size: 1rem;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: #FFD700;
+    }
+
+    header {
+      text-align: center;
+      padding: 4rem 2rem 2rem;
+    }
+
+    h1 {
+      font-size: 3rem;
+      font-weight: bold;
+      color: #000;
+      margin-bottom: 1rem;
+      letter-spacing: 2px;
+    }
+
+    p.tagline {
+      font-size: 1.2rem;
+      color: #555;
+      max-width: 650px;
+      margin: 0 auto;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 3rem 1rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr); 
+      grid-template-rows: repeat(3, 1fr);
+      gap: 2rem;
+      width: 100%;
+      max-width: 900px;
+    }
+
+    .btn {
+      width: 100%;
+      background-color: #FFD700;
+      color: #000;
+      font-weight: bold;
+      padding: 1.5rem;
+      border: none;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 1.05rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .btn:hover {
+      background-color: #f5c400;
+      transform: translateY(-4px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      color: #666;
+      font-size: 0.9rem;
+      border-top: 1px solid #ddd;
+      background: #fafafa;
+    }
+
+    @media (max-width: 900px) {
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: auto;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html" style="text-decoration: none; color: inherit;"><div class="logo">CRACKIT</div></a>
+    <div class="nav-links">
+    <a href="ai.html" style="align-self: center;">⚡AI</a>
+      <a href="index.html" style="align-self: center;">Home</a>
+      <a href="#" style="align-self: center;">About</a>
+      <a href="#" style="align-self: center;">Features</a>
+      <a href="#" style="align-self: center;">Contact</a>
+      <div class="user-profile">
+        <a href="dash.html" style="text-decoration: none; color: inherit;">
+          <img src="https://preview.redd.it/all-the-one-piece-icons-ive-made-to-date-v0-5z849rri9kfc1.jpg?width=1000&format=pjpg&auto=webp&s=c8db1d4111ae23cb1724f15a7f5782821e7f1582" alt="User Profile" style="border-radius: 50%; width: 40px; height: 40px;">
+        </a>
+      </div>
+  </nav>
+
+  <header>
+    <h1>CRACKIT</h1>
+    <p class="tagline">Discover your strengths and unlock your true potential</p>
+  </header>
+
+  <main>
+    <div class="grid">
+      <a href ="pagect.html"><button class="btn">Critical Thinking</button></a>
+      <button class="btn">Problem Solving</button>
+      <button class="btn">Creativity</button>
+      <button class="btn">Adaptability</button>
+      <button class="btn">Adventurous</button>
+      <button class="btn">Decision Making</button>
+      <button class="btn">Pressure Handling</button>
+      <button class="btn">Welfare</button>
+      <button class="btn">Time Management</button>
+    </div>
+  </main>
+
+  <footer>
+    © 2025 CRACKIT. All rights reserved.
+  </footer>
+</body>
+</html>

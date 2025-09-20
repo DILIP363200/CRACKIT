@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CRACKIT - AI Career Chatbot</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background-color: #000; 
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    nav {
+      width: 100%;
+      padding: 1.2rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #000;
+      background: #000;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #fff;
+      letter-spacing: 1px;
+    }
+
+    .nav-links {
+      text-align: center;
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #fff;
+      font-size: 1rem;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: #FFD700;
+    }
+
+    header {
+      text-align: center;
+      padding: 3rem 2rem 1rem;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+      letter-spacing: 2px;
+    }
+
+    p.tagline {
+      font-size: 1.1rem;
+      color: #555;
+      max-width: 650px;
+      margin: 0 auto;
+    }
+
+    main {
+      flex: 1;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #chat-box {
+      width: 100%;
+      max-width: 1600px;
+      flex: 1;
+      border: 1px solid #000;
+      border-radius: 10px;
+      padding: 1rem;
+      overflow-y: auto;
+      margin-bottom: 1.5rem;
+      background: #000;
+    }
+
+    .chat-bubble {
+      max-width: 100%;
+      padding: 0.5rem 1rem;
+      border-radius: 12px;
+      margin: 0.5rem 0;
+      line-height: 1.5;
+      white-space: pre-line;
+      align-self: center;
+    }
+
+    .chat-bubble a {
+      color: #FFD700;
+      text-decoration: underline;
+    }
+
+    .user-msg {
+      background: #FFD700;
+      color: #000;
+      margin-left: auto;
+    }
+
+    .bot-msg {
+      background: #333;
+      border: 1px solid #FFD700;
+      margin-right: auto;
+    }
+
+    .input-bar {
+      width: 100%;
+      max-width: 800px;
+      display: flex;
+      gap: 1rem;
+    }
+
+    .input-bar input {
+      flex: 1;
+      padding: 0.8rem;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background: #fff;
+      color: #000;
+      font-size: 1rem;
+    }
+
+    .input-bar button {
+      padding: 0.8rem 1.5rem;
+      background: #FFD700;
+      color: #000;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .input-bar button:hover {
+      background: #f5c400;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      color: #666;
+      font-size: 0.9rem;
+      border-top: 1px solid #ddd;
+      background: #fafafa;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html" style="text-decoration: none; color: inherit;">
+      <div class="logo">CRACKIT</div>
+    </a>
+    <div class="nav-links">
+      <a href="ai.html">Home</a>
+      <a href="#">About</a>
+      <a href="#">Features</a>
+      <a href="#">Contact</a>
+      <div class="user-profile">
+        <a href="dash.html">
+          <img src="https://preview.redd.it/all-the-one-piece-icons-ive-made-to-date-v0-5z849rri9kfc1.jpg?width=1000&format=pjpg&auto=webp&s=c8db1d4111ae23cb1724f15a7f5782821e7f1582" alt="User Profile" style="border-radius: 50%; width: 40px; height: 40px;">
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <header>
+    <h1>AI Career Chatbot</h1>
+  </header>
+
+  <main>
+    <div id="chat-box">
+      <div class="bot-msg chat-bubble" style="align-self: center;">
+        👋 Hi! I'm your AI mentor. What do you want to become?
+      </div>
+    </div>
+
+    <div class="input-bar">
+      <input id="user-input" type="text" placeholder="Ask anything">
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </main>
+
+  <footer>
+    © 2025 CRACKIT. All rights reserved.
+  </footer>
+
+  <script type="module">
+    import { GoogleGenerativeAI } from "https://esm.run/@google/generative-ai";
+
+    const genAI = new GoogleGenerativeAI("AIzaSyCVfxGL35Kn_1th59oWd0Y9Uad9HNQ1SsM"); 
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+
+    const chatBox = document.getElementById('chat-box');
+    const input = document.getElementById('user-input');
+
+    function addMessage(text, type) {
+      const div = document.createElement('div');
+      div.classList.add('chat-bubble', type === 'user' ? 'user-msg' : 'bot-msg');
+      div.innerHTML = text;
+      chatBox.appendChild(div);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    async function sendMessage() {
+      const userText = input.value.trim();
+      if (!userText) return;
+      addMessage(userText, 'user');
+      input.value = '';
+
+      let thinking = document.createElement('div');
+      thinking.classList.add('chat-bubble', 'bot-msg');
+      thinking.innerHTML = "⏳ Thinking...";
+      chatBox.appendChild(thinking);
+      chatBox.scrollTop = chatBox.scrollHeight;
+
+      try {
+        const result = await model.generateContent(userText);
+
+        thinking.remove();
+        const reply = result.response.text();
+        addMessage(reply, 'bot');
+      } catch (error) {
+        thinking.remove();
+        addMessage("❌ Error connecting to Google AI.", 'bot');
+        console.error(error);
+      }
+    }
+
+    input.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") sendMessage();
+    });
+  </script>
+</body>
+</html>
+
